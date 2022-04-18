@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css.css/butyo.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/hira.js"></script>
+    <title>部長ステージ</title>
+</head>
+
+<body>
+
+
+
+    <!--左の吹き出し-->
+    <div class="talking">
+        <figure class="talking-left_icon">
+            <img src="img/fukidasi/butyo.jpeg" alt="代替テキスト">
+            <figcaption>部長</figcaption>
+        </figure>
+        <div class="talking-left">
+            <p>ドスドスドッスン‼︎（俺の家を建ててくれ‼︎）</p>
+        </div>
+    </div>
+    <!--左の吹き出し終わり-->
+
+    <!--右の吹き出し-->
+    <div class="talking" id="choose_meterial">
+        <figure class="talking-right_icon">
+            <img src="img/fukidasi/wario.jpeg" alt="代替テキスト">
+            <figcaption>ワリオ親方</figcaption>
+        </figure>
+        <div class="talking-right">
+            <p>ガッハッハ！いいぞ！次の中から材料を選んでくれ！</p>
+            <input type="button" value="輝くコンクリート" onclick="choosedMeterial1()" id="high_wood">
+            <input type="button" value="普通のコンクリート" onclick="choosedMeterial2()" id="low_wood">
+        </div>
+    </div>
+    <!--右の吹き出し終わり-->
+
+    <!--右の吹き出し-->
+    <div class="talking" id="choose_method" style.display="none">
+        <figure class="talking-right_icon">
+            <img src="img/fukidasi/wario.jpeg" alt="代替テキスト">
+            <figcaption>ワリオ親方</figcaption>
+        </figure>
+        <div class="talking-right">
+            <p>ガッハッハ！次は建て方を選んでくれ！</p>
+            <input type="button" value="真面目に作る" onclick="choosedMethod1()" id="make_serious">
+            <input type="button" value="ワリオ親方の好きにして‼︎" onclick="choosedMethod2()" id="make_yourself">
+
+        </div>
+    </div>
+    <!--右の吹き出し終わり-->
+
+    <div>
+        <img id="home" class="hidden">
+    </div>
+
+    <div id="loading" class="hidden">
+        <img src="img/hous/roding.gif">
+    </div>
+
+    <div class="backbutton">
+        <a href="wario.html">Top</a>
+    </div>
+
+    <script>    // 0から4までのどれかを表示
+        const choose_meterial = document.getElementById("choose_meterial");
+        const choose_method = document.getElementById("choose_method");
+        const loading = document.getElementById("loading");
+        const home = document.getElementById("home");
+        const high_wood = document.getElementById("high_wood");
+        const low_wood = document.getElementById("low_wood");
+        const make_serious = document.getElementById("make_serious");
+        const make_yourself = document.getElementById("make_yourself");
+        const my_audio = new Audio("daiku.mp3")
+
+        let random_num1, random_num2, random_num3, random_num4
+
+        function choosedMeterial1() {
+            random_num1 = Math.floor(Math.random() * 5);
+            console.log(random_num1);
+            choose_method.style.display = "block";
+            high_wood.disabled = true;
+            low_wood.disabled = true;
+        }
+
+        function choosedMeterial2() {
+            random_num2 = Math.floor(Math.random() * 5);
+            console.log(random_num2);
+            choose_method.style.display = "block";
+            high_wood.disabled = true;
+            low_wood.disabled = true;
+        }
+
+        function choosedMethod1() {
+            random_num3 = Math.floor(Math.random() * 5);
+            console.log(random_num3);
+            loading.style.display = "block";
+            make_serious.disabled = true;
+            make_yourself.disabled = true;
+            createHome();
+            my_audio.currentTime = 0; //再生位置を先頭に戻す
+            my_audio.play(); //サウンドを再生
+        }
+
+        function choosedMethod2() {
+            random_num4 = Math.floor(Math.random() * 5);
+            console.log(random_num4);
+            loading.style.display = "block";
+            make_serious.disabled = true;
+            make_yourself.disabled = true;
+            createHome();
+            my_audio.currentTime = 0; //再生位置を先頭に戻す
+            my_audio.play(); //サウンドを再生
+        }
+
+        async function createHome() {
+            await sleep(3000);
+            loading.style.display = "none";
+            home.style.display = "block";
+            if (random_num1 < 4 && random_num4 === 4) {
+                console.log('大成功');
+                home.src = 'img/hous/highbest_concrete.jpeg'
+            } else if (random_num1 < 4 && random_num3 < 4) {
+                console.log('成功');
+                home.src = 'img/hous/best_concrete.jpeg'
+            } else if (random_num2 < 4 && random_num4 === 4) {
+                console.log('成功');
+                home.src = 'img/hous/best_concrete.jpeg'
+            } else if (random_num1 < 4  && random_num3 ===4 ){
+                console.log('成功');
+                home.src = 'img/hous/best_concrete.jpeg'
+            } else if (random_num1 === 4 && random_num4 < 4) {
+                console.log('普通');
+                home.src = 'img/hous/nomal_concrete.jpeg'
+            } else if (random_num1 === 4 && random_num3 < 5) {
+                console.log('普通');
+                home.src = 'img/hous/nomal_concrete.jpeg'
+            } else if (random_num2 < 4 && random_num3 < 5) {
+                console.log('普通');
+                home.src = 'img/hous/nomal_concrete.jpeg'
+            } else if (random_num2 < 4 && random_num4 < 4) {
+                console.log('普通');
+                home.src = 'img/hous/nomal_concrete.jpeg'
+            } else if (random_num1 < 4 && random_num4 < 4) {
+                console.log('成功')
+                home.src = 'img/hous/best_concrete.jpeg'
+            } else if (random_num2 === 4 && random_num4 < 4) {
+                console.log('失敗');
+                home.src = 'img/hous/row_concrete.jpeg'
+            } else if (random_num2 === 4 && random_num3 < 4) {
+                console.log('普通');
+                home.src = 'img/hous/nomal_concrete.jpeg'
+            } else if (random_num1 === 4 && random_num4 < 2) {
+                console.log('成功');
+                home.src = 'img/hous/best_concrete.jpeg'
+            } else if (random_num2 === 4 && random_num4 === 4) {
+                console.log('普通');
+                home.src = 'img/hous/nomal_concrete.jpeg'
+            } else if (random_num2 === 4 && random_num3 === 4) {
+                console.log('失敗');
+                home.src = 'img/hous/row_concrete.jpeg'
+            }
+        }
+
+
+        const sleep = ms => new Promise(res => setTimeout(res, ms))
+    </script>
+</body>
+
+</html>

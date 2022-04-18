@@ -1,0 +1,25 @@
+body{
+    width: 100%;
+}
+
+/*キャラクター選択*/
+.charcter_serect{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#hira_btn img{
+    width: 300px;
+    height: cover;
+}
+
+#butyo_btn img{
+    width: 300px;
+    height: cover;
+}
+
+#syatyo_btn img{
+    width: 300px;
+    height: cover;
+}
